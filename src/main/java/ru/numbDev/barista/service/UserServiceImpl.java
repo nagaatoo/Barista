@@ -45,8 +45,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public User getProfile() {
-        return new User(getUserEntity(currentUserService.getNickCurrentUser(), 403));
+    public Profile getProfile() {
+        var userEntity = getUserEntity(currentUserService.getNickCurrentUser(), 403);
+        var roles = userRoleRepository.findRoles(userEntity.getId());
+        return new Profile(userEntity, roles);
     }
 
     @Override
@@ -132,7 +134,7 @@ public class UserServiceImpl implements UserService {
         idNullCheck(unitId);
 
         return userRoleRepository
-                .isManagerOrOwnerForUnit(unitId, getProfile().getId())
+                .isManagerOrOwnerForUnit(unitId, getProfile().id())
                 .isPresent();
     }
 

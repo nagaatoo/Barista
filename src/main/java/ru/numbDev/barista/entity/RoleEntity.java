@@ -18,8 +18,6 @@ import java.util.Set;
 public class RoleEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_generator")
-//    @SequenceGenerator(name = "role_generator", sequenceName = "role_seq", allocationSize = 1)
     @Column(name = "id", updatable = false, nullable = false, unique=true)
     private Long id;
 

@@ -7,7 +7,7 @@ public interface UserService {
 
     String auth(Auth auth);
 
-    User getProfile();
+    Profile getProfile();
 
     User createClient(NewClient user);
 

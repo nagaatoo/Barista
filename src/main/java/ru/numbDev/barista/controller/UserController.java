@@ -22,7 +22,7 @@ public class UserController {
 
     @Operation(summary = "Получить профиль")
     @GetMapping
-    public User getProfile() {
+    public Profile getProfile() {
         return userService.getProfile();
     }
 

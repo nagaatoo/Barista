@@ -4,8 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.numbDev.barista.entity.RoleEntity;
 import ru.numbDev.barista.entity.UserRoleEntity;
+import ru.numbDev.barista.pojo.Role;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,4 +27,9 @@ public interface UserRoleRepository extends JpaRepository<UserRoleEntity, Long> 
 
     @Query(nativeQuery = true, value = "select u.id from user_role ur inner join users u on (ur.user_id = u.id) where u.nick_name = :nickName and ur.role_id = 4")
     Optional<Long> isAdmin(@Param("nickName") String nickName);
+
+    @Query(nativeQuery = true, value = "select r.code from user_role ur " +
+            "inner join role r on (r.id = ur.role_id) " +
+            "where ur.user_id = :userId")
+    List<Role> findRoles(@Param("userId") Long userId);
 }
