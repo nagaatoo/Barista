@@ -1,4 +1,4 @@
-package ru.numbDev.barista;
+package ru.numbDev.barista.emuns;
 
 public enum OrderStatus {
     CREATED,

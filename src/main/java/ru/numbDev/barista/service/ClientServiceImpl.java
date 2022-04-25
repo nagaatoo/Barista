@@ -3,7 +3,7 @@ package ru.numbDev.barista.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.numbDev.barista.OrderStatus;
+import ru.numbDev.barista.emuns.OrderStatus;
 import ru.numbDev.barista.entity.*;
 import ru.numbDev.barista.pojo.*;
 import ru.numbDev.barista.repository.*;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import ru.numbDev.barista.OrderStatus;
+import ru.numbDev.barista.emuns.OrderStatus;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.numbDev.barista.OrderStatus;
+import ru.numbDev.barista.emuns.OrderStatus;
 import ru.numbDev.barista.entity.*;
 import ru.numbDev.barista.pojo.*;
 import ru.numbDev.barista.repository.*;
 import ru.numbDev.barista.utils.ThrowUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
