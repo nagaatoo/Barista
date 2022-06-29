@@ -30,13 +30,14 @@ public class BusinessServiceImpl implements BusinessService {
     private final TableRepository tableRepository;
     private final DishRepository dishRepository;
     private final MenuRepository menuRepository;
+    private final FileService fileService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BusinessUnit createUnit(NewUnit unit) {
         idNullCheck(unit.ownerId());
 
-        var address = addressService.parseAddress(unit.fullAddres());
+        var address = addressService.parseAddress(unit.fullAddress());
         var wallet = walletService.initWallet();
         var owner = userService.findUserById(unit.ownerId());
         var coordinate = new CoordinateEntity()
@@ -54,7 +55,25 @@ public class BusinessServiceImpl implements BusinessService {
                 .setWallet(wallet)
                 .setCoordinate(coordinate);
 
-        return new BusinessUnit(unitRepository.save(unitEntity));
+        var saved = new BusinessUnit(unitRepository.save(unitEntity));
+        fileService.saveFiles(unit.files(), saved.id(), unit);
+        return saved;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public BusinessUnit updateUnit(UpdateUnit unit) {
+        idNullCheck(unit.unitId());
+
+        var unitEntity = findUnitById(unit.unitId());
+        unitEntity
+                .getMetadata()
+                .setDescription(unit.description());
+
+        var result = new BusinessUnit(unitRepository.save(unitEntity));
+
+        fileService.saveFiles(unit.files(), unit.unitId(), unit);
+        return result;
     }
 
     @Override
@@ -69,7 +88,8 @@ public class BusinessServiceImpl implements BusinessService {
                 .map(BusinessOrder::new)
                 .collect(Collectors.toList());
 
-        return new BusinessUnit(unit, orders);
+        var files = fileService.getFiles(unitId, unit.getPics());
+        return new BusinessUnit(unit, orders, files);
     }
 
     @Override

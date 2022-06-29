@@ -15,10 +15,11 @@ public record BusinessUnit(
     Wallet wallet,
     List<Comment> comments,
     List<BusinessOrder> orders,
-    List<Table> tables
+    List<Table> tables,
+    List<String> files
 ) {
 
-    public BusinessUnit(UnitEntity entity, List<BusinessOrder> orders) {
+    public BusinessUnit(UnitEntity entity, List<BusinessOrder> orders, List<String> files) {
         this(
                 entity.getId(),
                 entity.getName(),
@@ -26,7 +27,8 @@ public record BusinessUnit(
                 new Wallet(entity.getWallet()),
                 entity.getComments().stream().map(Comment::new).collect(Collectors.toList()),
                 orders,
-                entity.getTables().stream().map(Table::new).collect(Collectors.toList())
+                entity.getTables().stream().map(Table::new).collect(Collectors.toList()),
+                files
         );
     }
 
@@ -37,6 +39,7 @@ public record BusinessUnit(
                 (int) entity.getRang().stream().mapToInt(RangEntity::getValue).average().orElse(0),
                 new Wallet(entity.getWallet()),
                 entity.getComments().stream().map(Comment::new).collect(Collectors.toList()),
+                new ArrayList<>(),
                 new ArrayList<>(),
                 new ArrayList<>()
         );

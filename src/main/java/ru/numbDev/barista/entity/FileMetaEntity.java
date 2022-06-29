@@ -25,6 +25,14 @@ public class FileMetaEntity {
     private MetadataEntity metadata;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "unit_id", referencedColumnName = "id")
+    private UnitEntity unit;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "unit_news_id", referencedColumnName = "id")
+    private UnitNewsEntity news;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dish_id", referencedColumnName = "id")
     private DishEntity dish;
 }

@@ -2,8 +2,12 @@ package ru.numbDev.barista.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "unit_news")
@@ -23,5 +27,9 @@ public class UnitNewsEntity {
     @ManyToOne
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     private UnitEntity unit;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<FileMetaEntity> pics = new ArrayList<>();
 
 }

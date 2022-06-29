@@ -178,6 +178,7 @@ CREATE TABLE file_meta
 (
     id           bigint PRIMARY KEY,
     metadata_id  bigint REFERENCES metadata (id),
+    unit_id      bigint REFERENCES unit (id),
     unit_news_id bigint REFERENCES unit_news (id),
     dish_id      bigint REFERENCES dish (id),
     file_path    varchar(300) NOT NULL UNIQUE

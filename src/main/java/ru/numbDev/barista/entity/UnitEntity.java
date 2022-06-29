@@ -52,6 +52,10 @@ public class UnitEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
     @Fetch(FetchMode.SUBSELECT)
+    private List<FileMetaEntity> pics = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
+    @Fetch(FetchMode.SUBSELECT)
     private List<OrderClientEntity> ordersClients = new ArrayList<>();
 
     @OneToMany(mappedBy = "unit")
@@ -66,7 +70,7 @@ public class UnitEntity {
     @Fetch(FetchMode.SUBSELECT)
     private List<CommentEntity> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
     @Fetch(FetchMode.SUBSELECT)
     private List<MenuEntity> menus = new ArrayList<>();
 }

@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.numbDev.barista.entity.MenuEntity;
 import ru.numbDev.barista.pojo.*;
 import ru.numbDev.barista.service.BusinessService;
 
@@ -116,5 +117,4 @@ public class BusinessController {
     public String getTipForAddress(@PathVariable("proto") String proto) {
         return businessService.getTipForAddress(proto);
     }
-
 }
